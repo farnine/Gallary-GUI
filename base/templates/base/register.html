@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}register{% endblock %}
+
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+
+    {% for field in form %}
+    <li>
+        {{field.label_tag}}
+        {{field}}
+        {{field.errors}}
+    <li>
+
+    {% endfor %}
+
+    <button type="submit">Register </button>
+
+{% endblock %}
