@@ -1,5 +1,9 @@
 from django.shortcuts import render,redirect
-from .forms import RegisterForm
+
+
+from .forms import RegisterForm, CustomAuthenticationForm
+from django.contrib.auth.views import LoginView
+
 # Create your views here.
 
 
@@ -26,3 +30,13 @@ def register(request):
     context={"form":form}
 
     return render(request,"base/register.html",context)
+
+
+class CustomLoginView(LoginView):
+    template_name="base/login.html"
+    authentication_form=CustomAuthenticationForm
+
+    def get_success_url(self):
+        return reverse_lazy("home")
+    
+
