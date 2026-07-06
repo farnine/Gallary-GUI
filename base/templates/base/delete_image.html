@@ -1,0 +1,12 @@
+
+
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        <h4> Do you want to delete? </h4>
+        <button type="submit"> Yes, delete</button>
+
+        <button type="submit">
+            <a href="{% url "home" %}"> Cancel </a>
+        </button>
+</div>

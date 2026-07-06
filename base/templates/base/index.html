@@ -6,4 +6,9 @@
 {% block content %}
 
 <h1> Home </h1>
+<div>
+    {% for image in data %}
+        <a href="{% url "detail" image.id %}"><img src="{{image.image_path.url}}" alt="juice" width="400" height="300"></a>
+    {% endfor %}
+</div>
 {% endblock %}

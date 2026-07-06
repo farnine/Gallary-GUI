@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}details{% endblock %}
+
+{% block content %}
+
+
+<div>
+    <img src="{{image.image_path.url}}" alt="ocean" width="600" height="400">
+    <p>Title: {{image.title}}</p>
+    <p>Description: {{image.description}}</p>
+    <p>Date: {{image.upload_date}}</p>
+    <p>Author: {{image.upload_by}}</p>
+</div>
+
+<button style="background-color:red;" type="submit"><a href="{% url "delete" image.id %}"> Delete </a></button><br>
+<button style="background-color:blue;" type="submit"><a href="{% url "delete" image.id %}">Edit</a></button>
+{% comment %} edit is remained  {% endcomment %}
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+<h2>Enter newpassword</h2>
+
+<div>
+    <p>Please enter your new password twice so we can verify you typed it in correctly.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                {{field.label_tag}}
+                {{field}}
+            </div>
+            <div style="color: red;">{{field.errors}}</div>
+            
+        {% endfor %}
+
+        <button type="submit">Change password</button>
+</div>

@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 from .validators import custom_authentication_password,duplicate_email,duplicate_username
 from django.contrib.auth.forms import AuthenticationForm
 
+from .models import Image
+
 class RegisterForm(forms.ModelForm):
     confirm_password=forms.CharField(max_length=50, widget=(forms.PasswordInput(attrs={"placeholder":"Re-Enter"})))
     password=forms.CharField(max_length=50,validators=[custom_authentication_password] ,widget=(forms.PasswordInput(attrs={"placeholder":"Enter Password"})))
@@ -45,3 +47,12 @@ class RegisterForm(forms.ModelForm):
 class CustomAuthenticationForm(AuthenticationForm):
     username=forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Enter Username"}))
     password=forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Enter Password"}))
+
+
+
+class ImageForm(forms.ModelForm):
+
+    class Meta:
+
+        model=Image
+        fields=["title","description","catagory","image_path"]
