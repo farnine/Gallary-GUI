@@ -12,9 +12,10 @@
     <p>Date: {{image.upload_date}}</p>
     <p>Author: {{image.upload_by}}</p>
 </div>
-
-<button style="background-color:red;" type="submit"><a href="{% url "delete" image.id %}"> Delete </a></button><br>
-<button style="background-color:blue;" type="submit"><a href="{% url "delete" image.id %}">Edit</a></button>
+{% if user.is_authenticated %}
+    <button style="background-color:red;" type="submit"><a href="{% url "delete" image.id %}"> Delete </a></button><br>
+    <button style="background-color:blue;" type="submit"><a href="{% url "update" image.id %}">Edit</a></button>
+{% endif%}
 {% comment %} edit is remained  {% endcomment %}
 
 

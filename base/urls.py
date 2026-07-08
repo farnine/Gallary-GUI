@@ -8,6 +8,7 @@ urlpatterns=[
     path("",views.home, name="home"),
     path("register/", views.register, name="register"),
     path("login/", views.CustomLoginView.as_view(), name="login"),
+    path("logout/",views.LogoutCustom.as_view(), name="logout" ),
     path("password_reset/", PasswordResetView.as_view(template_name="accounts/password_reset.html"), name="password_reset"),
     path("reset_password_sent/",PasswordResetDoneView.as_view(template_name="accounts/reset_password_sent.html"), name="password_reset_done"),
     path("reset/<uidb64>/<token>/", PasswordResetConfirmView.as_view(template_name="accounts/reset_confirm_form.html"), name="password_reset_confirm"),
@@ -17,7 +18,8 @@ urlpatterns=[
 
     path("upload/", views.upload_Image, name="upload_page"),
     path("details/<int:pk>/", views.details, name="detail"),
-    path("delete/<int:pk>/", views.delete_image, name="delete")
+    path("delete/<int:pk>/", views.delete_image, name="delete"),
+    path("update/<int:pk>", views.update, name="update"),
     
 
 

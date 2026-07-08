@@ -1,15 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+    
+
+class Catagories(models.Model):
+    name=models.CharField(max_length=30)
+
 class Image(models.Model):
     title=models.CharField(max_length=50)
     description=models.TextField()
-    catagory=models.CharField(max_length=50)
+    catagory=models.ManyToManyField(Catagories, related_name="images")
     upload_date=models.DateTimeField(auto_now_add=True)
-    upload_by=models.ForeignKey(User, on_delete=models.CASCADE, related_name="images")
+    upload_by=models.ForeignKey(User, on_delete=models.CASCADE, related_name="author")
     image_path=models.ImageField(upload_to="images")
 
 
     def __str__(self):
 
         return self.title
+

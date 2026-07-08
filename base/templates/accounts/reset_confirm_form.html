@@ -1,18 +1,48 @@
-<h2>Enter newpassword</h2>
+{% extends "layout.html" %}
 
-<div>
-    <p>Please enter your new password twice so we can verify you typed it in correctly.</p>
+{% block title %}Set New Password{% endblock %}
 
-    <form method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-            <div>
-                {{field.label_tag}}
-                {{field}}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-5">
+                    <h2 class="card-title text-center mb-4">Set New Password</h2>
+                    
+                    <p class="text-muted text-center mb-4">Please enter your new password twice so we can verify you typed it in correctly.</p>
+                    
+                    <form method="POST" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                {% endfor %}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endif %}
+
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="invalid-feedback d-block text-danger">
+                                        {% for error in field.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 mt-3">Change Password</button>
+                    </form>
+                </div>
             </div>
-            <div style="color: red;">{{field.errors}}</div>
-            
-        {% endfor %}
-
-        <button type="submit">Change password</button>
+        </div>
+    </div>
 </div>
+{% endblock %}

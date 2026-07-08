@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Image
 from django.urls import reverse_lazy
-from .forms import RegisterForm, CustomAuthenticationForm,ImageForm
-from django.contrib.auth.views import LoginView
+from .forms import RegisterForm, CustomAuthenticationForm,ImageForm,UpdateForm
+from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -42,6 +42,10 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy("home")
+class LogoutCustom(LogoutView):
+    def get_success_url(self):
+        return reverse_lazy("login")
+
     
 @login_required
 def upload_Image(request):
@@ -73,7 +77,7 @@ def details(request,pk):
 
     context={"image":image}
     return render(request,"base/image_details.html",context)
-
+@login_required
 def delete_image(request,pk):
     image=get_object_or_404(Image, id=pk)
 
@@ -82,5 +86,23 @@ def delete_image(request,pk):
         return redirect("home")
     
     return render(request, "base/delete_image.html")
+@login_required
+def update(request,pk):
+    data=get_object_or_404(Image,id=pk)
+    if request.method=="POST":
+        form=UpdateForm(request.POST, instance=data)
+        if form.is_valid():
+            form.save()
+
+            return redirect("home")
+    else:
+        form=UpdateForm(instance=data)
+
+    context={"form":form, "data":data}
+
+    return render(request,"base/update.html",context)
+
+
+
 
 
