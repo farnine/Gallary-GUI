@@ -73,7 +73,7 @@ def upload_Image(request):
 
 
 def details(request,pk):
-    image= get_object_or_404(Image, id=pk)
+    image= get_object_or_404(Image, id=pk,upload_by=request.user)
 
     context={"image":image}
     return render(request,"base/image_details.html",context)
@@ -89,6 +89,8 @@ def delete_image(request,pk):
 @login_required
 def update(request,pk):
     data=get_object_or_404(Image,id=pk)
+    # data=Image.objects.get(id=pk, upload_by=request.user)
+   
     if request.method=="POST":
         form=UpdateForm(request.POST, instance=data)
         if form.is_valid():

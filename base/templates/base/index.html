@@ -5,21 +5,22 @@
 
 {% block content %}
 
-<h1> Home </h1>
-<div class="card-group">
-    {% for image in data%}
-    <div class="card">
-        <a href="{% url "detail" image.id %}"><img src="{{image.image_path.url}}" alt="juice" class="card-image-top"></a>
-        <div class="card-body">
-            <h5 class="card-title">{{image.title}}</h5>
-            <p class="card-text">{{image.description}}</p>
-            <p class="card-text"><small class="text-body-secondary">{{image.upload_date}}</small></p>
+ 
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for image in data %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <a href="{% url 'detail' image.id %}">
+                <img src="{{ image.image_path.url }}" alt="{{ image.title }}" class="card-img-top img-fluid" style="height: 220px; object-fit: cover;">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ image.title }}</h5>
+                <p class="card-text">{{ image.description }}</p>
+                <p class="card-text"><small class="text-body-secondary">{{ image.upload_date }}</small></p>
+            </div>
         </div>
     </div>
     {% endfor %}
 </div>
-    {% comment %} {% for image in data %}
-        <a href="{% url "detail" image.id %}"><img src="{{image.image_path.url}}" alt="juice" ></a>
-    {% endfor %} {% endcomment %}
 
 {% endblock %}

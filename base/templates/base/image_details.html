@@ -3,20 +3,26 @@
 {% block title %}details{% endblock %}
 
 {% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <img src="{{ image.image_path.url }}" alt="{{ image.title }}" class="card-img-top img-fluid" style="max-height: 500px; object-fit: cover;">
+            <div class="card-body">
+                <h2 class="card-title">{{ image.title }}</h2>
+                <p class="card-text">{{ image.description }}</p>
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item"><strong>Date:</strong> {{ image.upload_date }}</li>
+                    <li class="list-group-item"><strong>Author:</strong> {{ image.upload_by }}</li>
+                </ul>
 
-
-<div>
-    <img src="{{image.image_path.url}}" alt="ocean" width="600" height="400">
-    <p>Title: {{image.title}}</p>
-    <p>Description: {{image.description}}</p>
-    <p>Date: {{image.upload_date}}</p>
-    <p>Author: {{image.upload_by}}</p>
+                {% if user.is_authenticated %}
+                <div class="d-flex gap-2">
+                    <a href="{% url 'delete' image.id %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'update' image.id %}" class="btn btn-primary">Edit</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
-{% if user.is_authenticated %}
-    <button style="background-color:red;" type="submit"><a href="{% url "delete" image.id %}"> Delete </a></button><br>
-    <button style="background-color:blue;" type="submit"><a href="{% url "update" image.id %}">Edit</a></button>
-{% endif%}
-{% comment %} edit is remained  {% endcomment %}
-
-
 {% endblock %}

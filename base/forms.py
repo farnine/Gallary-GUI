@@ -68,7 +68,7 @@ class ImageForm(forms.ModelForm):
                 "class":"form-control",
                 "rows":"4"
             }),
-            "catagory":forms.Select(attrs={
+            "catagory":forms.SelectMultiple(attrs={
                 "class":"form-control"
             }),
             "image_path":forms.FileInput(attrs={
@@ -91,7 +91,7 @@ class UpdateForm(forms.ModelForm):
                 "class":"form-control",
                 "rows":"4"
             }),
-            "catagory":forms.Select(attrs={
+            "catagory":forms.SelectMultiple(attrs={
                 "class":"form-control"
             })
         }
