@@ -8,7 +8,7 @@ from django.db.models import Q
 
 # Create your views here.
 
-
+ 
 def home(request):
     query=request.GET.get("q")
     if query:
