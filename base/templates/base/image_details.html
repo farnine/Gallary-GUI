@@ -15,7 +15,7 @@
                     <li class="list-group-item"><strong>Author:</strong> {{ image.upload_by }}</li>
                 </ul>
 
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated and image.upload_by == request.user%}
                 <div class="d-flex gap-2">
                     <a href="{% url 'delete' image.id %}" class="btn btn-danger">Delete</a>
                     <a href="{% url 'update' image.id %}" class="btn btn-primary">Edit</a>

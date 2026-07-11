@@ -12,13 +12,22 @@
 <body class="d-flex flex-column min-vh-100">
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="{% url 'home' %}">📸 Gallery</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <form class="d-flex flex-grow-1 mx-lg-4 my-2 my-lg-0 search-form"  method="GET" role="search">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-0 search-icon">🔎</span>
+                        <input class="form-control border-0 shadow-none" type="search" id="site-search" name="q" placeholder="Search photos, albums..." required>
+                        <button class="btn btn-light search-btn" type="submit">Search</button>
+                    </div>
+                </form>
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     
                     {% if user.is_authenticated %}
                         <li class="nav-item">
